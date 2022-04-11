@@ -1,0 +1,170 @@
+SQL> CREATE TABLE trainerdetails(
+  2  tid VARCHAR(255),
+  3  tname VARCHAR(255),
+  4  contact INT UNIQUE,
+  5  doj DATE,
+  6  salary INT NOT NULL
+  7  shiftdetail VARCHAR(255)
+  8  );
+shiftdetail VARCHAR(255)
+*
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainerdetails(
+  2  tid VARCHAR(255),
+  3  tname VARCHAR(255),
+  4  contact INT UNIQUE,
+  5  doj DATE,
+  6  salary INT NOT NULL,
+  7  shiftdetail VARCHAR(255)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,TO_DATE('05.05.1994','DD-MM-YYYY'),20000,'Morning');
+
+1 row created.
+
+SQL> INSERT INTO trainerdetails VALUES('t2','Anand',2223334445,TO_DATE('07.05.1994','DD-MM-YYYY'),20000,'Evening');
+
+1 row created.
+
+SQL> INSERT INTO trainerdetails VALUES('t3','Abhishek',3334445556,TO_DATE('20.05.1994','DD-MM-YYYY'),20000,'Morning');
+
+1 row created.
+
+SQL> INSERT INTO trainerdetails VALUES('t4','del',6667778889,TO_DATE('01.04.1994','DD-MM-YYYY'),20000,'Evening');
+
+1 row created.
+
+SQL> SELECT CHR(65),CHR(97)
+  2  FROM DUAL;
+
+C C                                                                             
+- -                                                                             
+A a                                                                             
+
+SQL> SELECT CONCAT(tname,tid)
+  2  FROM trainerdetails;
+
+CONCAT(TNAME,TID)                                                               
+--------------------------------------------------------------------------------
+Vaasut1                                                                         
+Anandt2                                                                         
+Abhishekt3                                                                      
+delt4                                                                           
+
+SQL> SELECT INITCAP(tname)
+  2  FROM trainerdetails;
+
+INITCAP(TNAME)                                                                  
+--------------------------------------------------------------------------------
+Vaasu                                                                           
+Anand                                                                           
+Abhishek                                                                        
+Del                                                                             
+
+SQL> SELECT INSTR(tname,'a',1,1)
+  2  FROM trainerdetails;
+
+INSTR(TNAME,'A',1,1)                                                            
+--------------------                                                            
+                   2                                                            
+                   3                                                            
+                   0                                                            
+                   0                                                            
+
+SQL> SELECT tname , LENGTH(tname) AS length_of_name
+  2  FROM TRAINERDETAILS;
+
+TNAME                                                                           
+--------------------------------------------------------------------------------
+LENGTH_OF_NAME                                                                  
+--------------                                                                  
+Vaasu                                                                           
+             5                                                                  
+                                                                                
+Anand                                                                           
+             5                                                                  
+                                                                                
+Abhishek                                                                        
+             8                                                                  
+                                                                                
+
+TNAME                                                                           
+--------------------------------------------------------------------------------
+LENGTH_OF_NAME                                                                  
+--------------                                                                  
+del                                                                             
+             3                                                                  
+                                                                                
+
+SQL> SELECT LOWER(tname)
+  2  FROM TRAINERDETAILS;
+
+LOWER(TNAME)                                                                    
+--------------------------------------------------------------------------------
+vaasu                                                                           
+anand                                                                           
+abhishek                                                                        
+del                                                                             
+
+SQL> SELECT UPPER(tname)
+  2  FROM TRAINERDETAILS;
+
+UPPER(TNAME)                                                                    
+--------------------------------------------------------------------------------
+VAASU                                                                           
+ANAND                                                                           
+ABHISHEK                                                                        
+DEL                                                                             
+
+SQL> SELECT ABS(-25) "Abs" FROM DUAL;
+
+       Abs                                                                      
+----------                                                                      
+        25                                                                      
+
+SQL> SELECT ACOS(.28)"Arc_Cosine" FROM DUAL;
+
+Arc_Cosine                                                                      
+----------                                                                      
+1.28700222                                                                      
+
+SQL> SELECT ATAN(.6)"ATAN" FROM DUAL;
+
+      ATAN                                                                      
+----------                                                                      
+  .5404195                                                                      
+
+SQL> SELECT FLOOR(12.22)
+  2  FROM DUAL;
+
+FLOOR(12.22)                                                                    
+------------                                                                    
+          12                                                                    
+
+SQL> SELECT MOD(11,3)
+  2  FROM DUAL;
+
+ MOD(11,3)                                                                      
+----------                                                                      
+         2                                                                      
+
+SQL> SELECT POWER(3,2)"POWER"
+  2  FROM DUAL;
+
+     POWER                                                                      
+----------                                                                      
+         9                                                                      
+
+SQL> SELECT ROUND(43.698,1)
+  2  FROM DUAL;
+
+ROUND(43.698,1)                                                                 
+---------------                                                                 
+           43.7                                                                 
+
+SQL> SPOOL OFF
