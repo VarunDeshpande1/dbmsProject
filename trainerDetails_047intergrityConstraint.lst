@@ -1,0 +1,345 @@
+SQL> CREATE TABLE trainer
+  2  (
+  3  tid PRIMARY KEY,
+  4  tname NOT NULL,
+  5  mobile_number UNIQUE,
+  6  custid FOREIGN KEY,
+  7  c
+  8  ca
+  9  a;
+custid FOREIGN KEY,
+               *
+ERROR at line 6:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainer
+  2  (
+  3  tid VARCHAR(10) PRIMARY KEY,
+  4  tname VARCHAR(20) NOT NULL,
+  5  mobile_number NUMBER UNIQUE,
+  6  custid VARCHAR(10)FOREIGN KEY,
+  7  salary NUMBER NOT NULL,
+  8  CHECK (salary>=10000)
+  9  );
+custid VARCHAR(10)FOREIGN KEY,
+                  *
+ERROR at line 6:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainer
+  2  (
+  3  tid VARCHAR(10) PRIMARY KEY,
+  4  tname VARCHAR(20) NOT NULL,
+  5  mobile_number NUMBER UNIQUE,
+  6  custid VARCHAR(10) FOREIGN KEY,
+  7  salary NUMBER NOT NULL,
+  8  CHECK (salary>=10000)
+  9  );
+custid VARCHAR(10) FOREIGN KEY,
+                   *
+ERROR at line 6:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainer
+  2  (
+  3  tid VARCHAR(10) PRIMARY KEY,
+  4  tname VARCHAR(20) NOT NULL,
+  5  mobile_number NUMBER UNIQUE,
+  6  salary NUMBER NOT NULL,
+  7  CHECK (salary>=10000)
+  8  );
+
+Table created.
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT tid;
+ALTER TABLE trainer DROP CONSTRAINT tid
+                                    *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY;
+ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY
+                                            *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY tid;
+ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY tid
+                                            *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY CASCADE;
+ALTER TABLE trainer DROP CONSTRAINT PRIMARY KEY CASCADE
+                                            *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE trainer DROP  PRIMARY KEY CASCADE;
+
+Table altered.
+
+SQL> DESC trainer
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TID                                                VARCHAR2(10)
+ TNAME                                     NOT NULL VARCHAR2(20)
+ MOBILE_NUMBER                                      NUMBER
+ SALARY                                    NOT NULL NUMBER
+
+SQL> ALTER TABLE trainer DROP  NOT NULL CASCADE;
+ALTER TABLE trainer DROP  NOT NULL CASCADE
+                          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT NOT NULL CASCADE;
+ALTER TABLE trainer DROP CONSTRAINT NOT NULL CASCADE
+                                    *
+ERROR at line 1:
+ORA-02250: missing or invalid constraint name 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT NOT NULL(tname) CASCADE;
+ALTER TABLE trainer DROP CONSTRAINT NOT NULL(tname) CASCADE
+                                    *
+ERROR at line 1:
+ORA-02250: missing or invalid constraint name 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT tname NOT NULL CASCADE;
+ALTER TABLE trainer DROP CONSTRAINT tname NOT NULL CASCADE
+                                          *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT  NOT NULL tname CASCADE;
+ALTER TABLE trainer DROP CONSTRAINT  NOT NULL tname CASCADE
+                                     *
+ERROR at line 1:
+ORA-02250: missing or invalid constraint name 
+
+
+SQL> ALTER TABLE trainer DROP CONSTRAINT  NOT NULL tname;
+ALTER TABLE trainer DROP CONSTRAINT  NOT NULL tname
+                                     *
+ERROR at line 1:
+ORA-02250: missing or invalid constraint name 
+
+
+SQL> ALTER TABLE trainer DROP  NOT NULL tname;
+ALTER TABLE trainer DROP  NOT NULL tname
+                          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ALTER TABLE trainer ADD PRIMARY KEY(tid);
+
+Table altered.
+
+SQL> ALTER TABLE trainer ADD UNIQUE(tid);
+ALTER TABLE trainer ADD UNIQUE(tid)
+                        *
+ERROR at line 1:
+ORA-02261: such unique or primary key already exists in the table 
+
+
+SQL> ALTER TABLE trainer DROP  UNIQUE CASCADE;
+ALTER TABLE trainer DROP  UNIQUE CASCADE
+                                 *
+ERROR at line 1:
+ORA-00906: missing left parenthesis 
+
+
+SQL> ALTER TABLE trainer DROP  UNIQUE(mobile_number) CASCADE;
+
+Table altered.
+
+SQL> ALTER TABLE trainer ADD UNIQUE(mobile_number);
+
+Table altered.
+
+SQL> ALTER TABLE trainer ADD CHECK(salary BETWEEN 10000 AND 20000);
+
+Table altered.
+
+SQL> ALTER TABLE trainer ADD( cid VARCHAR(10) FOREIGN KEY);
+ALTER TABLE trainer ADD( cid VARCHAR(10) FOREIGN KEY)
+                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> ALTER TABLE table_name ADD cid VARCHAR(10);
+ALTER TABLE table_name ADD cid VARCHAR(10)
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ALTER TABLE trainer ADD cid VARCHAR(10);
+
+Table altered.
+
+SQL> (
+  2  ;
+
+*
+ERROR at line 2:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> CREATE TABLE customer
+  2  (
+  3  cid VARCHAR(10) PRIMARY KEY,
+  4  cname VARCHAR(20)
+  5  );
+
+Table created.
+
+SQL> ALTER TABLE trainer ADD FOREIGN KEY(cid) REFERENCES customer(cid);
+
+Table altered.
+
+SQL> desc trainer;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ TID                                       NOT NULL VARCHAR2(10)
+ TNAME                                     NOT NULL VARCHAR2(20)
+ MOBILE_NUMBER                                      NUMBER
+ SALARY                                    NOT NULL NUMBER
+ CID                                                VARCHAR2(10)
+
+SQL> ALTER TABLE trainer DISABLE unique(mobile_number) cascade;
+
+Table altered.
+
+SQL> ALTER TABLE trainer ENABLE unique(mobile_number) cascade;
+ALTER TABLE trainer ENABLE unique(mobile_number) cascade
+                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ALTER TABLE trainer ENABLE unique(mobile_number) CASCADE;
+ALTER TABLE trainer ENABLE unique(mobile_number) CASCADE
+                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> SELECT constraint_name,constraint_type,search_condition
+  2  FROM user_constraints
+  3  WHERE table_name='TRAINER';
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+C                                                                               
+-                                                                               
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+SYS_C006215                                                                     
+R                                                                               
+                                                                                
+                                                                                
+SYS_C006189                                                                     
+C                                                                               
+"TNAME" IS NOT NULL                                                             
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+C                                                                               
+-                                                                               
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+                                                                                
+SYS_C006190                                                                     
+C                                                                               
+"SALARY" IS NOT NULL                                                            
+                                                                                
+SYS_C006191                                                                     
+C                                                                               
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+C                                                                               
+-                                                                               
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+salary>=10000                                                                   
+                                                                                
+SYS_C006209                                                                     
+C                                                                               
+salary BETWEEN 10000 AND 20000                                                  
+                                                                                
+SYS_C006201                                                                     
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+C                                                                               
+-                                                                               
+SEARCH_CONDITION                                                                
+--------------------------------------------------------------------------------
+P                                                                               
+                                                                                
+                                                                                
+SYS_C006206                                                                     
+U                                                                               
+                                                                                
+                                                                                
+
+7 rows selected.
+
+SQL> SELECT constraint_name,column_name
+  2  FROM user_cons_columns
+  3  WHERE table_name='TRAINER';
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+COLUMN_NAME                                                                     
+--------------------------------------------------------------------------------
+SYS_C006189                                                                     
+TNAME                                                                           
+                                                                                
+SYS_C006190                                                                     
+SALARY                                                                          
+                                                                                
+SYS_C006191                                                                     
+SALARY                                                                          
+                                                                                
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+COLUMN_NAME                                                                     
+--------------------------------------------------------------------------------
+SYS_C006201                                                                     
+TID                                                                             
+                                                                                
+SYS_C006206                                                                     
+MOBILE_NUMBER                                                                   
+                                                                                
+SYS_C006209                                                                     
+SALARY                                                                          
+                                                                                
+
+CONSTRAINT_NAME                                                                 
+--------------------------------------------------------------------------------
+COLUMN_NAME                                                                     
+--------------------------------------------------------------------------------
+SYS_C006215                                                                     
+CID                                                                             
+                                                                                
+
+7 rows selected.
+
+SQL> spool off

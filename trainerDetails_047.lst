@@ -1,0 +1,303 @@
+SQL> CREATE TABLE trainerdetails(
+  2  tid VARCHAR(255),
+  3  tname VARCHAR(255),
+  4  contact INT UNIQUE,
+  5  doj DATE,
+  6  salary INT NOT NULL
+  7  shiftdetail VARCHAR(255)
+  8  );
+shiftdetail VARCHAR(255)
+*
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainerdetails(
+  2  tid VARCHAR(255) PRIMARY KEY,
+  3  tname VARCHAR(255),
+  4  contact INT UNIQUE,
+  5  doj DATE,
+  6  salary INT NOT NULL
+  7  shiftdetail VARCHAR(255)
+  8  );
+shiftdetail VARCHAR(255)
+*
+ERROR at line 7:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE TABLE trainerdetails(
+  2  tid VARCHAR(255) PRIMARY KEY,
+  3  tname VARCHAR(255),
+  4  contact INT UNIQUE,
+  5  doj DATE,
+  6  salary INT NOT NULL,
+  7  shiftdetail VARCHAR(255)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'4.21.1994',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'4.21.1994',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'4.4.1994',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'4.4.1994',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'5.21.1994',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'5.21.1994',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'1994.4.21',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'1994.4.21',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01861: literal does not match format string 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'05.21.1994',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'05.21.1994',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'05.05.1994',20000,'Morning');
+INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,'05.05.1994',20000,'Morning')
+                                                          *
+ERROR at line 1:
+ORA-01843: not a valid month 
+
+
+SQL> INSERT INTO trainerdetails VALUES('t1','Vaasu',1112223334,TO_DATE('05.05.1994','DD-MM-YYYY'),20000,'Morning');
+
+1 row created.
+
+SQL> INSERT INTO trainerdetails VALUES('t2','Anand',2223334445,TO_DATE('07.05.1994','DD-MM-YYYY'),20000,'Evening');
+
+1 row created.
+
+SQL> INSERT INTO trainerdetails VALUES('t3','Abhishek',3334445556,TO_DATE('20.05.1994','DD-MM-YYYY'),20000,'Morning');
+
+1 row created.
+
+SQL> SELECT * FROM trainerdetails
+  2  ;
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t1                                                                              
+Vaasu                                                                           
+1112223334 05-MAY-94      20000                                                 
+Morning                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t2                                                                              
+Anand                                                                           
+2223334445 07-MAY-94      20000                                                 
+Evening                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t3                                                                              
+Abhishek                                                                        
+3334445556 20-MAY-94      20000                                                 
+Morning                                                                         
+                                                                                
+
+SQL> UPDATE trainerdetails
+  2  SET salary = salary +10000
+  3  WHERE tid='t1';
+
+1 row updated.
+
+SQL> SELECT * FROM trainerdetails
+  2  ;
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t1                                                                              
+Vaasu                                                                           
+1112223334 05-MAY-94      30000                                                 
+Morning                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t2                                                                              
+Anand                                                                           
+2223334445 07-MAY-94      20000                                                 
+Evening                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t3                                                                              
+Abhishek                                                                        
+3334445556 20-MAY-94      20000                                                 
+Morning                                                                         
+                                                                                
+
+SQL> INSERT INTO trainerdetails VALUES('t4','del',6667778889,TO_DATE('01.04.1994','DD-MM-YYYY'),20000,'Evening');
+
+1 row created.
+
+SQL> SELECT * FROM trainerdetails
+  2  ;
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t1                                                                              
+Vaasu                                                                           
+1112223334 05-MAY-94      30000                                                 
+Morning                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t2                                                                              
+Anand                                                                           
+2223334445 07-MAY-94      20000                                                 
+Evening                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t3                                                                              
+Abhishek                                                                        
+3334445556 20-MAY-94      20000                                                 
+Morning                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t4                                                                              
+del                                                                             
+6667778889 01-APR-94      20000                                                 
+Evening                                                                         
+                                                                                
+
+SQL> DELETE FROM trainerdetails
+  2  WHERE tid='t4';
+
+1 row deleted.
+
+SQL> SELECT * FROM trainerdetails
+  2  ;
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t1                                                                              
+Vaasu                                                                           
+1112223334 05-MAY-94      30000                                                 
+Morning                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t2                                                                              
+Anand                                                                           
+2223334445 07-MAY-94      20000                                                 
+Evening                                                                         
+                                                                                
+
+TID                                                                             
+--------------------------------------------------------------------------------
+TNAME                                                                           
+--------------------------------------------------------------------------------
+   CONTACT DOJ           SALARY                                                 
+---------- --------- ----------                                                 
+SHIFTDETAIL                                                                     
+--------------------------------------------------------------------------------
+t3                                                                              
+Abhishek                                                                        
+3334445556 20-MAY-94      20000                                                 
+Morning                                                                         
+                                                                                
+
+SQL> spool off
